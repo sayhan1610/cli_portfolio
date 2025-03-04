@@ -33,6 +33,7 @@ Type 'clear' to clear the terminal.
         const renderHelp = () => {
             appendOutput(`
     Available Commands:
+    - 🤓 no-geek: Visit a GUI version of the portfolio.
     - 🏡 home: Go back to the main menu.
     - ℹ️ about: Learn more about me.
     - ♟️ experience: See my experience.
@@ -77,8 +78,36 @@ Type 'clear' to clear the terminal.
                 appendCommand(command);
                 inputField.value = '';
 
+                if (command === "no-geek") {
+                    appendOutput("Booting into portfolio...");
+                
+                    let percentage = 0;
+                    const loadingLine = document.createElement("div");
+                    loadingLine.textContent = "Loading... 0%";
+                    outputContainer.appendChild(loadingLine);
+                
+                    const interval = setInterval(() => {
+                        percentage += 10;
+                        if (percentage > 100) {
+                            clearInterval(interval);
+                            loadingLine.textContent = "Loading... 100%";
+                            setTimeout(() => {
+                                appendOutput("Redirecting...");
+                                setTimeout(() => {
+                                    window.location.href = "https://sayhan.hackclub.app";
+                                }, 500);
+                            }, 500);
+                        } else {
+                            loadingLine.textContent = `Loading... ${percentage}%`;
+                        }
+                    }, 300); 
+                
+                    return; 
+                }
+                
                 if (command in routes) {
                     if (command === 'home') renderHomePage();
+                    
                     else if (command === 'help') renderHelp();
                     else if (command === 'clear') outputContainer.innerHTML = '';
                     else fetchDataAndRender(routes[command]);
