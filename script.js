@@ -87,7 +87,7 @@ Available Commands:
             inputField.value = '';
 
             if (command === "no-geek") {
-                appendOutput("Booting into portfolio...");
+                appendOutput("Booting into GUI...");
             
                 let percentage = 0;
                 const loadingLine = document.createElement("div");
@@ -100,7 +100,7 @@ Available Commands:
                         clearInterval(interval);
                         loadingLine.textContent = "Loading... 100%";
                         setTimeout(() => {
-                            appendOutput("Redirecting...");
+                            appendOutput("Content loaded successfully!");
                             setTimeout(() => {
                                 window.location.href = "https://sayhan.hackclub.app";
                             }, 500);
