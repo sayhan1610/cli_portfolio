@@ -77,52 +77,58 @@ Available Commands:
 
     inputField.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            const command = inputField.value.trim().toLowerCase();
-            if (command) {
-                commandHistory.push(command);
-                historyIndex = commandHistory.length; // Reset history index
-            }
-
-            appendCommand(command);
+            const fullCommand = inputField.value.trim().toLowerCase();
+            if (!fullCommand) return;
+    
+            commandHistory.push(fullCommand);
+            historyIndex = commandHistory.length; // Reset history index
+    
+            appendCommand(fullCommand);
             inputField.value = '';
-
-            if (command === "no-geek") {
-                appendOutput("Booting into GUI...");
-            
-                let percentage = 0;
-                const loadingLine = document.createElement("div");
-                loadingLine.textContent = "Loading... 0%";
-                outputContainer.appendChild(loadingLine);
-            
-                const interval = setInterval(() => {
-                    percentage += 10;
-                    if (percentage > 100) {
-                        clearInterval(interval);
-                        loadingLine.textContent = "Loading... 100%";
-                        setTimeout(() => {
-                            appendOutput("Content loaded successfully!");
+    
+            // Split by '&&' or '&' using regex, ensuring no empty commands
+            const commands = fullCommand.split(/\s*&+\s*/).filter(cmd => cmd.trim());
+    
+            commands.forEach(command => {
+                if (command === "no-geek") {
+                    appendOutput("Booting into GUI...");
+                
+                    let percentage = 0;
+                    const loadingLine = document.createElement("div");
+                    loadingLine.textContent = "Loading... 0%";
+                    outputContainer.appendChild(loadingLine);
+                
+                    const interval = setInterval(() => {
+                        percentage += 10;
+                        if (percentage > 100) {
+                            clearInterval(interval);
+                            loadingLine.textContent = "Loading... 100%";
                             setTimeout(() => {
-                                window.location.href = "https://sayhan.hackclub.app";
+                                appendOutput("Content loaded successfully!");
+                                setTimeout(() => {
+                                    window.location.href = "https://sayhan.hackclub.app";
+                                }, 500);
                             }, 500);
-                        }, 500);
-                    } else {
-                        loadingLine.textContent = `Loading... ${percentage}%`;
-                    }
-                }, 300); 
-            
-                return; 
-            }
-            
-            if (command in routes) {
-                if (command === 'home') renderHomePage();
-                else if (command === 'help') renderHelp();
-                else if (command === 'clear') outputContainer.innerHTML = '';
-                else fetchDataAndRender(routes[command]);
-            } else {
-                appendOutput(`Command '${command}' not recognized. Type 'help' for a list of available commands.`);
-            }
+                        } else {
+                            loadingLine.textContent = `Loading... ${percentage}%`;
+                        }
+                    }, 300); 
+                
+                    return; 
+                }
+    
+                if (command in routes) {
+                    if (command === 'home') renderHomePage();
+                    else if (command === 'help') renderHelp();
+                    else if (command === 'clear') outputContainer.innerHTML = '';
+                    else fetchDataAndRender(routes[command]);
+                } else {
+                    appendOutput(`Command '${command}' not recognized. Type 'help' for a list of available commands.`);
+                }
+            });
         }
     });
+    
 
     document.addEventListener("keydown", (event) => {
         inputField.focus();
