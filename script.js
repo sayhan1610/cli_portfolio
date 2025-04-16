@@ -131,7 +131,7 @@ Available Commands:
                             clearInterval(interval);
                             loadingLine.textContent = "Loading... 100%";
                             setTimeout(() => {
-                                appendOutput("Content loaded successfully!");
+                                appendOutput("Destruction modee!!");
                                 setTimeout(() => {
                                     window.location.href = "https://ajaw.sayhan.hackclub.app";
                                 }, 500);
