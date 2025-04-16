@@ -116,6 +116,33 @@ Available Commands:
                 
                     return; 
                 }
+
+                if (command === "ajaw") {
+                    appendOutput("You're done Kinich, you're so done! Hehe, pleasure doing business with you...");
+
+                    let percentage = 0;
+                    const loadingLine = document.createElement("div");
+                    loadingLine.textContent = "Loading... 0%";
+                    outputContainer.appendChild(loadingLine);
+
+                    const interval = setInterval(() => {
+                        percentage += 10;
+                        if (percentage > 100) {
+                            clearInterval(interval);
+                            loadingLine.textContent = "Loading... 100%";
+                            setTimeout(() => {
+                                appendOutput("Content loaded successfully!");
+                                setTimeout(() => {
+                                    window.location.href = "https://ajaw.sayhan.hackclub.app";
+                                }, 500);
+                            }, 500);
+                        } else {
+                            loadingLine.textContent = `Loading... ${percentage}%`;
+                        }
+                    }, 300);
+
+                    return;
+                }
     
                 if (command in routes) {
                     if (command === 'home') renderHomePage();
