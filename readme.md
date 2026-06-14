@@ -2,7 +2,7 @@
 
 ![CLI Portfolio](/static/123.gif)
 
-[**CLI Portfolio**](https://sayhan1610.github.io/cli_portfolio) is a sleek, terminal-themed personal portfolio designed to make a lasting impression while being incredibly developer-friendly. So yeah, it's not just another portfolio template—it's an experience, offering simplicity, customizability, and style in a way you've never seen before.
+[**CLI Portfolio**](https://geek.sayhan.app) is a sleek, terminal-themed personal portfolio designed to make a lasting impression while being incredibly developer-friendly. So yeah, it's not just another portfolio template—it's an experience, offering simplicity, customizability, and style in a way you've never seen before.
 
 ---
 
